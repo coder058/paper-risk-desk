@@ -81,6 +81,10 @@ class Desk:
                             (proposal_id, strategy, side, qty, bar.timestamp.isoformat(), "proposed"))
             if self.db.execute("SELECT changes()").fetchone()[0]:
                 self._event("propose", proposal_id, "awaiting-human", {"closed_bar": bar.timestamp.isoformat(), "source": "SYNTHETIC fixture"})
+            else:
+                existing = self.db.execute("SELECT qty FROM proposals WHERE id=?", (proposal_id,)).fetchone()
+                if not existing or existing["qty"] != qty:
+                    raise ValueError("Replay conflicts with the recorded proposal")
         return proposal_id
 
     def reject(self, proposal_id: str, reason: str):

@@ -39,6 +39,8 @@ def test_proposal_needs_human_and_next_bar(tmp_path, bars):
     desk = Desk(path)
     proposal = desk.propose("sma_cross", "buy", bars[100], 2)
     assert desk.propose("sma_cross", "buy", bars[100], 2) == proposal
+    with pytest.raises(ValueError, match="Replay conflicts"):
+        desk.propose("sma_cross", "buy", bars[100], 3)
     assert desk.proposals()[0]["status"] == "proposed"
     assert desk.account().shares == 0
     with pytest.raises(ValueError, match="later bar"):
