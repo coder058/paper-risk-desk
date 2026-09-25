@@ -1,6 +1,6 @@
 {
   "baseline": "holdout SPY-shaped synthetic price change, same start/end; no fees or slippage modeled",
-  "config_sha256": "d3ef6ed8551f69c3cebddac0d9f73e1702a9b7351e51c0a71727046d53801779",
+  "config_sha256": "1f443f105e5cb8a0285c3ed8b1ff7aa3893bb994b303d759eb2cc419a31c1735",
   "fixture_sha256": "b7ae16d38f1d2e43c37d440d8519b806dd0688bf4b30679e0c808453e1bf43bc",
   "holdout_bars": 3900,
   "holdout_dates": [
