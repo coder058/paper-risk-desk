@@ -1,0 +1,67 @@
+{
+  "baseline": "holdout SPY-shaped synthetic price change, same start/end; no fees or slippage modeled",
+  "config_sha256": "d3ef6ed8551f69c3cebddac0d9f73e1702a9b7351e51c0a71727046d53801779",
+  "fixture_sha256": "b7ae16d38f1d2e43c37d440d8519b806dd0688bf4b30679e0c808453e1bf43bc",
+  "holdout_bars": 3900,
+  "holdout_dates": [
+    "2026-01-26",
+    "2026-02-06"
+  ],
+  "label": "SYNTHETIC laboratory tape; not historical SPY or evidence of trading performance",
+  "risk_challenge": {
+    "blocked": 6,
+    "cases": [
+      {
+        "decision": "order-size",
+        "name": "max-shares"
+      },
+      {
+        "decision": "order-size",
+        "name": "max-notional"
+      },
+      {
+        "decision": "orders-per-day",
+        "name": "orders-per-day"
+      },
+      {
+        "decision": "cooldown",
+        "name": "cooldown"
+      },
+      {
+        "decision": "HALTED: daily-loss",
+        "name": "persistent-halt"
+      },
+      {
+        "decision": "outside-RTH",
+        "name": "outside-RTH"
+      }
+    ],
+    "scenario": "SYNTHETIC constructed risk checks",
+    "tested": 6
+  },
+  "strategies": {
+    "mean_reversion_band": {
+      "blocked": 2912,
+      "buy_hold_price_change_percent": 0.157066,
+      "halts": 0,
+      "holdout_return_percent": -0.082572,
+      "max_drawdown_fraction": 0.00308444,
+      "proposals": 2942,
+      "simulated_fills": 30
+    },
+    "sma_cross": {
+      "blocked": 24,
+      "buy_hold_price_change_percent": 0.157066,
+      "halts": 0,
+      "holdout_return_percent": 0.918013,
+      "max_drawdown_fraction": 0.00132919,
+      "proposals": 54,
+      "simulated_fills": 30
+    }
+  },
+  "train_bars_used_only_for_indicator_warmup": 5850,
+  "train_dates": [
+    "2026-01-05",
+    "2026-01-23"
+  ]
+}

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paper-risk-desk"
+version = "0.1.0"
+requires-python = ">=3.11"
+description = "Paper-only risk and walk-forward harness for a synthetic US equity tape"
+dependencies = ["tzdata>=2025.2; platform_system == 'Windows'"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+paper-risk = "paper_risk.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["paper_risk*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

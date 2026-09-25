@@ -1,0 +1,20 @@
+{
+  "symbol": "SPY",
+  "starting_cash": 10000,
+  "shares_per_proposal": 2,
+  "risk": {
+    "max_order_notional": 500,
+    "max_order_shares": 5,
+    "max_daily_loss": 100,
+    "max_peak_drawdown_fraction": 0.05,
+    "max_orders_per_day": 3,
+    "cooldown_minutes": 30,
+    "rth_only": true
+  },
+  "strategies": {
+    "sma_cross": {"fast": 5, "slow": 20},
+    "mean_reversion_band": {"window": 20, "band_std": 1.5}
+  },
+  "walk_forward": {"train_days": 15}
+}
+
