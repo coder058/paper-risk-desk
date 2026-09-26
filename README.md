@@ -33,7 +33,17 @@ The fixture is a deterministic, SPY-shaped waveform from 5 January–6 February 
 
 There is **no Alpaca order adapter in this release**. An earlier paper-ready path was removed because a historical synthetic reference price must not authorize even a paper broker order. Any later execution adapter must require current authorized market data, broker account/position reconciliation, an explicit human confirmation, paper-only endpoint verification, and fail-closed stale-data handling. No energy contract or live brokerage support is claimed.
 
-The desk is deliberately separate from [Energy Monitor](https://energy-monitor-jordi.jlpmccs.chatgpt.site/): energy observations are not tradable signals here. No strategy alpha, profitability, or HFT capability is claimed.
+### Optional market context (read-only)
+
+For a separately requested observation—not a trade setup—capture a Pattern Forge candle snapshot and Energy Monitor electricity/generation response:
+
+```sh
+python -m paper_risk.cli context --symbol BTC --country nl --date 2026-09-25 --zone NL
+```
+
+An optional `--gas-point` adds one Energy Monitor physical-flow observation. The command makes bounded GET requests to the two fixed public origins and writes JSON to stdout only. It retains source identity, timestamps, units, stale/missing state, response hashes and local request duration. The Energy observation is not mapped to BTC or SPY, is not supplied to either strategy, and cannot authorize a paper or live order. Request duration is not source publication latency. Keep these observations distinct from the synthetic one-minute evaluation tape and from Alpaca's separate IEX-only read-only snapshot.
+
+The desk therefore displays three different kinds of evidence without blending them: fixture bars for deterministic tests, optional market-context observations, and a separately queried Alpaca paper-account snapshot. No strategy alpha, profitability, or HFT capability is claimed.
 
 ## Verify the claim
 

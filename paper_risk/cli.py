@@ -43,6 +43,12 @@ def main():
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("demo")
     sub.add_parser("paper-snapshot", help="Read-only Alpaca paper account and IEX bar; never submits orders")
+    context = sub.add_parser("context", help="Optional read-only Pattern Forge and Energy Monitor observations")
+    context.add_argument("--symbol", choices=("BTC", "ETH", "SOL"), required=True)
+    context.add_argument("--country", required=True, help="Energy Monitor country code")
+    context.add_argument("--date", required=True, help="explicit delivery date YYYY-MM-DD")
+    context.add_argument("--zone", help="optional Energy Monitor bidding zone")
+    context.add_argument("--gas-point", help="optional Energy Monitor gas flow point")
     ev = sub.add_parser("eval"); ev.add_argument("--check", action="store_true")
     for name in ("status", "approve", "reject", "halt", "resume", "audit"):
         command = sub.add_parser(name)
@@ -57,6 +63,11 @@ def main():
     if args.command == "paper-snapshot":
         from .alpaca_snapshot import snapshot
         print(json.dumps(snapshot(), indent=2))
+        return
+    if args.command == "context":
+        from .context import capture
+        print(json.dumps(capture(args.symbol, args.country, args.date, args.zone, args.gas_point),
+                         ensure_ascii=False, sort_keys=True, indent=2))
         return
     if args.command == "eval":
         return evaluation_main(args.check)
